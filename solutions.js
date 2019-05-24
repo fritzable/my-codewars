@@ -156,3 +156,81 @@ function incrementString (str) {
     return incrementedString
   }
 }
+
+// https://www.codewars.com/kata/can-you-get-the-loop
+// You are given a node that is the beginning of a linked list. This list always contains a tail and a loop.
+//
+// Your objective is to determine the length of the loop.
+//
+// For example in the following picture the tail's size is 3 and the loop size is 11.
+//
+// http://i42.tinypic.com/27wrmed.png
+// // Use the `getNext' method or 'next' property to get the following node.
+//
+// node.getNext()
+// node.next
+// Note: do NOT mutate the nodes!
+//
+// const LinkedList = function () {
+//   this.head = new Node()
+//   this.one = new Node()
+//   head.setNext(one)
+//   this.two = new Node()
+//   one.setNext(two)
+//   this.three = new Node()
+//   two.setNext(three)
+//   this.four = new Node()
+//   three.setNext(four)
+//   this.five = new Node()
+//   four.setNext(five)
+//   this.six = new Node()
+//   five.setNext(six)
+//   this.seven = new Node()
+//   six.setNext(seven)
+//   this.eight = new Node()
+//   seven.setNext(eight)
+//   eight.setNext(three)
+// }
+//
+// const Node = function (value, next) {
+//   this.value = value
+//   this.next = next
+// }
+//
+// // chai tests
+// describe('LinkedList Loop', function () {
+//   describe('loop_size', function () {
+//     const list = new LinkedList()
+//     list.head = Node.new('a',null)
+//
+//     it('LinkedList has a Node', function () {
+//       expect(list.head).to.be.an.instanceOf(Node)
+//     })
+
+// https://www.codewars.com/kata/replace-with-alphabet-position/train/javascript
+//
+// Welcome.
+//
+// In this kata you are required to, given a string, replace every letter with its position in the alphabet.
+//
+// If anything in the text isn't a letter, ignore it and don't return it.
+//
+// "a" = 1, "b" = 2, etc.
+//
+// Example
+// alphabet_position("The sunset sets at twelve o' clock.")
+// Should return "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11" (as a string)
+
+function alphabetPosition (text) {
+  const alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+  const lower = text.toLowerCase()
+  const nums = []
+  for (i = 0; i < lower.length; i++) {
+    const index = (alpha.indexOf(lower[i]) + 1)
+    if (index > 0) {
+      nums.push(index)
+    }
+  }
+  const joined = nums.join(' ')
+  return joined
+}
