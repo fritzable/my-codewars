@@ -288,37 +288,29 @@ function dataReverse(data) {
 
 snail = function (array) {
   const arr = []
-  const n = array.length
   const pattern = function (x) {
-
-    console.log('x is ', x)
-  // 0th array lists normally (0th-nth element)
-    x.shift().map(e => arr.push(e))
-    console.log('x is ', x)
-    console.log('arr is ', arr)
+    // 0th array lists normally (0th-nth element)
+    if (x !== 'undefined' && x.length > 0) {
+      x.shift().map(e => arr.push(e))
     // 1st - nth-1 xs list last element
-    x.map(e => arr.push(e.pop()))
-    console.log('x is ', x)
-    console.log('arr is ', arr)
+    }
+    if (x !== 'undefined' && x.length > 0) {
+      x.map(e => arr.push(e.pop()))
     // last x list in reverse
-    x.pop().reverse().map(e => arr.push(e))
-    console.log('x is ', x)
-    console.log('arr is ', arr)
+    }
+    if (x !== 'undefined' && x.length > 0) {
+      x.pop().reverse().map(e => arr.push(e))
     // nth-1 - 2nd xs list 1st element
-    x.reverse().map(e => arr.push(e.shift()))
-    console.log('x is ', x)
-    console.log('arr is ', arr)
-    x.reverse().pop().map(e => arr.push(e))
-    console.log('x is ', array)
-    console.log('arr is ', arr)
-    if (typeof x !== 'undefined' && x.length > 0) {
-  pattern(x)
-
-  } else {
-  return arr
-  }
+    }
+    if (x !== 'undefined' && x.length > 0) {
+      x.reverse().map(e => arr.push(e.shift()))
+    }
+    if (x !== 'undefined' && x.length > 0) {
+      pattern(x.reverse())
+    } else {
+    }
   }
   // pattern begins again with 1st array as 0th array
- pattern(array)
-
+  pattern(array)
+  return arr
 }
