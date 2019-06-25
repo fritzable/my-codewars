@@ -314,3 +314,151 @@ snail = function (array) {
   pattern(array)
   return arr
 }
+
+// https://www.codewars.com/kata/directions-reduction/train/javascript
+// Once upon a time, on a way through the old wild west,…
+// … a man was given directions to go from one point to another. The directions were "NORTH", "SOUTH", "WEST", "EAST". Clearly "NORTH" and "SOUTH" are opposite, "WEST" and "EAST" too. Going to one direction and coming back the opposite direction is a needless effort. Since this is the wild west, with dreadfull weather and not much water, it's important to save yourself some energy, otherwise you might die of thirst!
+//
+// How I crossed the desert the smart way.
+// The directions given to the man are, for example, the following:
+//
+// ["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"].
+// or
+//
+// { "NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST" };
+// or (haskell)
+//
+// [North, South, South, East, West, North, West]
+// You can immediatly see that going "NORTH" and then "SOUTH" is not reasonable, better stay to the same place! So the task is to give to the man a simplified version of the plan. A better plan in this case is simply:
+//
+// ["WEST"]
+// or
+//
+// { "WEST" }
+// or (haskell)
+//
+// [West]
+// or (rust)
+//
+// [WEST];
+// Other examples:
+// In ["NORTH", "SOUTH", "EAST", "WEST"], the direction "NORTH" + "SOUTH" is going north and coming back right away. What a waste of time! Better to do nothing.
+//
+// The path becomes ["EAST", "WEST"], now "EAST" and "WEST" annihilate each other, therefore, the final result is [] (nil in Clojure).
+//
+// In ["NORTH", "EAST", "WEST", "SOUTH", "WEST", "WEST"], "NORTH" and "SOUTH" are not directly opposite but they become directly opposite after the reduction of "EAST" and "WEST" so the whole path is reducible to ["WEST", "WEST"].
+//
+// Task
+// Write a function dirReduc which will take an array of strings and returns an array of strings with the needless directions removed (W<->E or S<->N side by side).
+//
+// The Haskell version takes a list of directions with data Direction = North | East | West | South. The Clojure version returns nil when the path is reduced to nothing. The Rust version takes a slice of enum Direction {NORTH, SOUTH, EAST, WEST}.
+//
+// Examples
+// dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]) => ["WEST"]
+// dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH"]) => []
+// See more examples in "Example Tests"
+// Note
+// Not all paths can be made simpler. The path ["NORTH", "WEST", "SOUTH", "EAST"] is not reducible. "NORTH" and "WEST", "WEST" and "SOUTH", "SOUTH" and "EAST" are not directly opposite of each other and can't become such. Hence the result path is itself : ["NORTH", "WEST", "SOUTH", "EAST"].
+// let count = 0
+// function dirReduc(arr){
+//
+//   function isOpp(){
+//
+//   // if opposite,
+//   if ((arr[0] === "NORTH" && arr[1] === "SOUTH") ||
+//     (arr[0] === "NORTH" && arr[1] === "SOUTH") ||
+//     (arr[0] === "EAST" && arr[1] === "WEST") ||
+//     (arr[0] === "WEST" && arr[1] === "EAST")) {
+//   // remove from arr
+//     arr.shift()
+//     arr.shift()
+//       console.log(arr)
+//       console.log(count)
+//   }
+//   // recursion
+//   if (arr !== undefined && arr.isArray && arr.length === 0) {
+//   return arr
+//   } else
+//   if (count > arr.length) {
+//   return arr
+//   } else
+//   if (arr !== undefined && arr.length > 0) {
+//   count += 1
+//   dirReduc(arr)
+//   }
+//   return arr
+//  }
+
+// https://www.codewars.com/kata/how-green-is-my-valley/train/javascript
+ // Input : an array of integers.
+ //
+ // Output : this array, but sorted in such a way that there are two wings:
+ //
+ // the left wing with numbers decreasing,
+ //
+ // the right wing with numbers increasing.
+ //
+ // the two wings have the same length. If the length of the array is odd the wings are around the bottom, if the length is even the bottom is considered to be part of the right wing.
+ //
+ // each integer l of the left wing must be greater or equal to its counterpart r in the right wing, the difference l - r being as small as possible. In other words the right wing must be nearly as steeply as the left wing.
+ //
+ // The function is make_valley or makeValley or make-valley.
+ //
+ // a = [79, 35, 54, 19, 35, 25]
+ // make_valley(a) --> [79, 35, 25, *19*, 35, 54]
+ // The bottom is 19, left wing is [79, 35, 25], right wing is [*19*, 35, 54].
+ // 79..................54
+ //     35..........35
+ //         25.
+ //           ..19
+ //
+ // a = [67, 93, 100, -16, 65, 97, 92]
+ // make_valley(a) --> [100, 93, 67, *-16*, 65, 92, 97]
+ // The bottom is -16, left wing [100, 93, 67] and right wing [65, 92, 97] have same length.
+ // 100.........................97
+ //     93..........
+ //                .........92
+ //         67......
+ //                .....65
+ //             -16
+ //
+ // a = [66, 55, 100, 68, 46, -82, 12, 72, 12, 38]
+ // make_valley(a) --> [100, 68, 55, 38, 12, *-82*, 12, 46, 66, 72]
+ // The bottom is -82, left wing is [100, 68, 55, 38, 12]], right wing is [*-82*, 12, 46, 66, 72].
+ //
+ // a = [14,14,14,14,7,14]
+ // make_valley(a) => [14, 14, 14, *7*, 14, 14]
+ //
+ // a = [14,14,14,14,14]
+ // make_valley(a) => [14, 14, *14*, 14, 14]
+ // A counter-example:
+ // a = [17, 17, 15, 14, 8, 7, 7, 5, 4, 4, 1]
+ // A solution could be [17, 17, 15, 14, 8, 1, 4, 4, 5, 7, 7]
+ // but the right wing [4, 4, 5, 7, 7] is much flatter than the left one
+ // [17, 17, 15, 14, 8].
+ //
+ // Summing the differences between left and right wing:
+ // (17-7)+(17-7)+(15-5)+(14-4)+(8-4) = 44
+ //
+ // Consider the following solution:
+ // [17, 15, 8, 7, 4, 1, 4, 5, 7, 14, 17]
+ // Summing the differences between left and right wing:
+ // (17-17)+(15-14)+(8-7)+(7-5)+(4-4) = 4
+ // The right wing is nearly as steeply than the right one.
+ function makeValley(arr) {
+     const vallArr = []
+   while (arr.length > 0) {
+     const mid = (Math.ceil(vallArr.length / 2))
+     // find the highest number
+     const largest = arr.reduce(function(x,y){
+        return (x > y) ? x : y
+        })
+     // remove from arr
+     const index = arr.indexOf(largest)
+     arr.splice(index, 1)
+     // push it to the center of new array
+     vallArr.splice(mid, 0, largest)
+     // repeat
+   }
+   return vallArr
+   }
