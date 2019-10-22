@@ -462,3 +462,114 @@ snail = function (array) {
    }
    return vallArr
    }
+
+// // https://practice.geeksforgeeks.org/problems/subarray-with-given-sum/0
+// // Given an unsorted array A of size N of non-negative integers, find a continuous sub-array which adds to a given number S.
+// //
+// // Input:
+// // The first line of input contains an integer T denoting the number of test cases. Then T test cases follow. Each test case consists of two lines. The first line of each test case is N and S, where N is the size of array and S is the sum. The second line of each test case contains N space separated integers denoting the array elements.
+// //
+// // Output:
+// // For each testcase, in a new line, print the starting and ending positions(1 indexing) of first such occuring subarray from the left if sum equals to subarray, else print -1.
+// //
+// // Constraints:
+// // 1 <= T <= 100
+// // 1 <= N <= 107
+// // 1 <= Ai <= 1010
+// //
+// // Example:
+// // Input:
+// // 2
+// // 5 12
+// // 1 2 3 7 5
+// // 10 15
+// // 1 2 3 4 5 6 7 8 9 10
+// // Output:
+// // 2 4
+// // 1 5
+// //
+// // Explanation :
+// // Testcase1: sum of elements from 2nd position to 4th position is 12
+// // Testcase2: sum of elements from 1st position to 5th position is 15
+// //
+// // ** For More Input/Output Examples Use 'Expected Output' option **
+//
+// function subArraySum(array, sum) {
+//   // iterate over each element
+//   // start summing with each element and
+//   let add = 0
+//   let i = 0
+//   let flag = 0
+//   let index1 = 1
+//
+//   if (flag===0) {
+//
+//   while(add<sum) {
+//     add+=array[i]
+//     i++
+//     console.log(add)
+//   }
+//
+//
+//   if (add!=sum) {
+//     flag = -1
+//     console.log(flag)
+//   }
+//   if (flag===-1) {
+//
+//   }
+// }
+//   }
+//
+//   // count index of each element
+//   // add consecutive elements
+//   // until sum === S
+//   // print first index and last index
+//   // or sum > S
+//   // start summing with next element
+// }
+
+// https://www.codewars.com/kata/form-the-largest/train/javascript
+// Task
+// Given a number , Return _The Maximum number _ could be formed from the digits of the number given .
+//
+// Notes
+// Only Positve numbers passed to the function , numbers Contain digits [1:9] inclusive  !alt !alt
+//
+// Digit Duplications could occur , So also consider it when forming the Largest  !alt
+//
+// Input >> Output Examples:
+// maxNumber (213) ==> return (321)
+// Explanation:
+// As 321 is _The Maximum number _ could be formed from the digits of the number *213*** .
+//
+// maxNumber (7389) ==> return (9873)
+// Explanation:
+// As 9873 is _The Maximum number _ could be formed from the digits of the number *7389*** .
+//
+// maxNumber (63729) ==> return (97632)
+// Explanation:
+// As 97632 is _The Maximum number _ could be formed from the digits of the number *63729*** .
+//
+// maxNumber (566797) ==> return (977665)
+// Explanation:
+// As 977665 is _The Maximum number _ could be formed from the digits of the number *566797*** .
+//
+// Note : Digit duplications are considered when forming the largest .
+//
+// maxNumber (17693284) ==> return (98764321)
+// Explanation:
+// As 98764321 is _The Maximum number _ could be formed from the digits of the number *17693284*** .
+
+function maxNumber(n){
+ n = n.toString()
+ n = n.split('')
+  function compareNum(a,b) {
+   return a - b
+  }
+n.sort(compareNum)
+n.reverse()
+n = n.join('')
+n = Number(n)
+ return n
+}
