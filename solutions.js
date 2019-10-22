@@ -573,3 +573,32 @@ n = n.join('')
 n = Number(n)
  return n
 }
+
+// https://www.codewars.com/kata/pyramid-array/javascript
+// Write a function that when given a number >= 0, returns an Array of ascending length subarrays.
+//
+// pyramid(0) => [ ]
+// pyramid(1) => [ [1] ]
+// pyramid(2) => [ [1], [1, 1] ]
+// pyramid(3) => [ [1], [1, 1], [1, 1, 1] ]
+// Note: the subarrays should be filled with 1s
+
+function pyramid(n) {
+  let array = []
+  for (let i = 0; i < n; i++) {
+    array.push([])
+  }
+  const reducer = (accumulator, currentValue) => {
+    let index = array.indexOf(currentValue)
+    for (let j = 0; j <= index; j++) {
+      array[index].push(1)
+      console.log(index)
+      }
+    }
+     if (array.length < 1) {
+      return array
+      } else {
+  array.reduce(reducer, 0)
+  }
+  return array
+}
